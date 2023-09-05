@@ -25,9 +25,9 @@ class RouterOS < Oxidized::Model
     comment version_line
   end
 
-  cmd '/system history print without-paging' do |cfg|
-    comment cfg
-  end
+  #cmd '/system history print without-paging' do |cfg|
+  #  comment cfg
+  #end
 
   post do
     Oxidized.logger.debug "lib/oxidized/model/routeros.rb: running /export for routeros version #{@ros_version}"
