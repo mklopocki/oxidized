@@ -82,8 +82,7 @@ a regular expression.
 username: oxidized
 password: S3cr3tx
 model: junos
-interval: 3600 #interval in seconds
-log: ~/.config/oxidized/log
+interval: 3600 #interval in seconds, when 0 is configured no fetch config is done at initial start and after
 debug: false
 threads: 30 # maximum number of threads
 # use_max_threads:
@@ -143,6 +142,16 @@ model_map:
   cisco: ios
   juniper: junos
   !ruby/regexp /procurve/: procurve
+logger:
+  # The default level is :info
+  # level: :info
+  appenders:
+    - type: syslog
+      level: :error
+    - type: stdout
+      level: :warn
+    - type: file
+      file: ~/.config/oxidized/info.log
 ```
 
 ## Advanced Group Configuration
@@ -548,3 +557,32 @@ end
 ```
 
 Remove a previous metadata by setting it to `nil`.
+
+## Store configuration only on significant changes
+Some devices produce configuration changes even though nothing relevant
+changed. For example, Cisco IOS produces a `Last configuration change at` as
+soon as you exit config mode, and FortiOS encrypts its passwords with a
+different salt on every run.
+
+By setting the [variable](#options-credentials-vars-etc-precedence)
+`output_store_mode` to `on_significant`, you can tell Oxidized only to
+store the configuration when significant changes occurred. The default is to
+always store the configuration.
+```yaml
+vars:
+  output_store_mode: on_significant
+```
+
+For this to work, the model must implement `cmd :significant_changes`:
+```ruby
+  cmd :significant_changes do |cfg|
+    cfg.reject_lines [
+      'Last configuration change at',
+      'NVRAM config last updated at'
+    ]
+  end
+```
+
+Note that store on significant change only applies to the main configuration,
+and will not affect
+[output types](Creating-Models.md#advanced-feature-output-type)

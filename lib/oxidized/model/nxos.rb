@@ -10,7 +10,10 @@ class NXOS < Oxidized::Model
 
   cmd :secret do |cfg|
     cfg.gsub! /^(snmp-server community).*/, '\\1 <secret hidden>'
-    cfg.gsub! /^(snmp-server user (\S+) (\S+) auth (\S+)) (\S+) (priv) (\S+)/, '\\1 <secret hidden> '
+    cfg.gsub!(
+      /^(snmp-server user \S+ \S+ auth \S+) \S+ (priv \S+) \S+ /,
+      '\\1 <secret hidden> \\2 <secret hidden> '
+    )
     cfg.gsub! /^(snmp-server host.*? )\S+( udp-port \d+)?$/, '\\1<secret hidden>\\2'
     cfg.gsub! /^(snmp-server mib community-map) \S+ ?(.*)/, '\\1 <secret hidden> \\2'
     cfg.gsub! /(password \d+) (\S+)/, '\\1 <secret hidden>'
@@ -25,8 +28,8 @@ class NXOS < Oxidized::Model
   end
 
   cmd 'show inventory all' do |cfg|
-    if cfg.include? "% Invalid parameter detected at '^' marker."
-      # 'show inventory all' isn't supported on older versions (See Issue #3657)
+    if cfg.match? /^% Invalid .* at '\^' marker\./
+      # 'show inventory all' isn't supported on older versions (See Issues #3657, #3779)
       cfg = cmd 'show inventory'
     end
     comment cfg

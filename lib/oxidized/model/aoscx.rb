@@ -22,9 +22,11 @@ class Aoscx < Oxidized::Model
   end
 
   cmd :secret do |cfg|
+    cfg.gsub! /^(user .* group .*(?: ciphertext)?) \S+/, '\\1 <secret hidden>'
     cfg.gsub! /^(snmp-server community) \S+(.*)/, '\\1 <secret hidden> \\2'
     cfg.gsub! /^(snmp-server host \S+) \S+(.*)/, '\\1 <secret hidden> \\2'
-    cfg.gsub! /^(radius-server host \S+ key) \S+(.*)/, '\\1 <secret hidden> \\2'
+    cfg.gsub! /^(snmpv3 user).*?(auth (?:md5|sha(?:\d{1,3})?) auth-pass ciphertext).*?(priv (?:des|aes(?:\d{1,3})?) priv-pass ciphertext).*/, '\\1 <user> \\2 <auth-pass> \\3 <priv-pass>'
+    cfg.gsub! /^(radius-server host \S+ key(?: ciphertext)?) \S+ (.*)/, '\\1 <secret hidden> \\2'
     cfg.gsub! /^(radius-server key).*/, '\\1 <configuration removed>'
     cfg.gsub! /^(tacacs-server host \S+ key) \S+(.*)/, '\\1 <secret hidden> \\2'
     cfg.gsub! /^(tacacs-server key).*/, '\\1 <secret hidden>'
@@ -35,22 +37,23 @@ class Aoscx < Oxidized::Model
     comment cfg
   end
 
-  cmd 'show environment' do |cfg|
-    def with_section(cfg, section, &block)
-      cfg.sub!(/(show environment #{section}.*?-{10,}\n)(.*?)(?=\nshow environment|\z)/m) do
-        header = ::Regexp.last_match(1)
-        content = ::Regexp.last_match(2)
-        block.call(content) if block_given?
-        header + content
-      end
+  def with_section(cfg, section, &block)
+    cfg.sub!(/(show environment #{section}.*?-{10,}\n)(.*?)(?=\nshow environment|\z)/m) do
+      header = ::Regexp.last_match(1)
+      content = ::Regexp.last_match(2)
+      block.call(content) if block_given?
+      header + content
     end
+  end
 
+  cmd 'show environment' do |cfg|
     with_section(cfg, 'fan') do |content|
-      content.gsub!(/^(.*)(slow|normal|medium|fast|max) (.*?)\d+ +$/, '\\1<speed> \\3<rpm>')
+      content.gsub!(/^((?:\S+ +){3})(slow  |normal|medium|fast  |max   |N\/A   ) (.*?)\d+ +$/, '\\1<speed> \\3<rpm>')
     end
 
     with_section(cfg, 'power-consumption') do |content|
       content.gsub!(/^(.*?) (?:\d+\.\d+ +)+\d+\.\d+$/, '\\1 <power hidden>')
+      content.gsub!(/^(Total Power Consumption +)\d+\.\d+$/, '\\1<power hidden>')
     end
 
     with_section(cfg, 'power-allocation') do |content|
@@ -58,7 +61,7 @@ class Aoscx < Oxidized::Model
     end
 
     with_section(cfg, 'temperature') do |content|
-      content.gsub!(/^(.*) \d+\.\d+ C (.*)$/, '\\1 <hidden>\\2')
+      content.gsub!(/^(.*) -?\d+\.\d+ C (.*)$/, '\\1 <hidden>\\2')
     end
     comment cfg
   end
@@ -71,7 +74,10 @@ class Aoscx < Oxidized::Model
     comment cfg
   end
 
-  cmd 'show system | exclude "Up Time" | exclude "CPU" | exclude "Memory" | exclude "Pkts .x" | exclude "Lowest" | exclude "Missed"' do |cfg|
+  cmd 'show system' do |cfg|
+    cfg = cfg.reject_lines [
+      "Up Time", "CPU", "Memory", /Pkts .x/, "Lowest", "Missed"
+    ]
     comment cfg
   end
 

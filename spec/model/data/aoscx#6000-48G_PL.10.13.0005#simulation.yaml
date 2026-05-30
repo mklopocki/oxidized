@@ -64,7 +64,7 @@ commands:
     1/1-PHY-33-40                   line-card-module     53.00 C    normal
     1/1-PHY-41-48                   line-card-module     58.00 C    normal
     
-    1/1-Inlet-Air                   management-module    22.62 C    normal
+    1/1-Inlet-Air                   management-module    -2.62 C    normal
     1/1-Switch-ASIC-Internal        management-module    48.00 C    normal
     1/1-Switch-CPU-1                management-module    47.50 C    normal
     1/1-Switch-CPU-2                management-module    49.25 C    normal
@@ -99,22 +99,6 @@ commands:
                                Number           Number           Number     \x20
     -------------------------------------------------------------------------
     1/1/52    1G-SX            J4858D           CN87000000       1990-4415
-    
-    TEST_SW123#\x20
-  "show system | exclude \"Up Time\" | exclude \"CPU\" | exclude \"Memory\" | exclude \"Pkts .x\" | exclude \"Lowest\" | exclude \"Missed\"\n": |-
-    show system | exclude \"Up Time\" | exclude \"CPU\" | exclude \"Memory\" | \r exclude \"Pkts .x\" | exclude \"Lowest\" | exclude \"Missed\"
-    Hostname               : TEST_SW123                   \x20
-    System Description     : PL.10.13.0005                \x20
-    System Contact         : SYSTEM CONTACT               \x20
-    System Location        : Location  
-    
-    Vendor                 : Aruba                        \x20
-    Product Name           : R8N85A 6000 48G CL4 4SFP Swch       \x20
-    Chassis Serial Nbr     : CN21000000                   \x20
-    Base MAC Address       : 9460d5-000000                \x20
-    ArubaOS-CX Version     : PL.10.13.0005                \x20
-    
-    Time Zone              : Europe/Berlin                \x20
     
     TEST_SW123#\x20
   "show system\n": |-
