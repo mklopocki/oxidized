@@ -2,10 +2,10 @@ class Unifiswitch < Oxidized::Model
   using Refinements
 
   comment '!'
-  prompt /^(?:[\w.-]+#|\(UBNT\)\s[>#])\s*$/
+  prompt /^(?:\(UBNT\)\s*>|[A-Za-z0-9.\-]+[#>])\s*$/
 
   cmd 'show running-config' do |cfg|
-    cfg.reject_lines ['System Up Time']
+    cfg.reject_lines ['System Up Time', 'SYSTEM CONFIG FILE', 'Current Configuration']
     cfg.each_line.to_a[4..-4].join
   end
 
@@ -19,7 +19,7 @@ class Unifiswitch < Oxidized::Model
 
     pre_logout do
       cmd 'exit'
-      cmd 'exit' if vars :enable
+      cmd 'exit'
       cmd 'exit'
     end
   end
