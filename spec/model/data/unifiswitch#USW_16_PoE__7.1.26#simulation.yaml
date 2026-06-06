@@ -1,0 +1,287 @@
+---
+init_prompt: |-
+    \r
+    \r
+    BusyBox v1.25.1 () built-in shell (ash)\r
+    \r
+    \r
+      ___ ___      .__________.__\r
+     |   |   |____ |__\\_  ____/__|\r
+     |   |   /    \\|  ||  __) |  |   (c) 2010-2024\r
+     |   |  |   |  \\  ||  \\   |  |   Ubiquiti Inc.\r
+     |______|___|  /__||__/   |__|\r
+                |_/                  https://www.ui.com\r
+    \r
+          Welcome to UniFi USW-16-PoE!\r
+    \r
+    ********************************* NOTICE **********************************\r
+    * By logging in to, accessing, or using any Ubiquiti product, you are     *\r
+    * signifying that you have read our Terms of Service (ToS) and End User   *\r
+    * License Agreement (EULA), understand their terms, and agree to be       *\r
+    * fully bound to them. The use of SSH (Secure Shell) can potentially      *\r
+    * harm Ubiquiti devices and result in lost access to them and their data. *\r
+    * By proceeding, you acknowledge that the use of SSH to modify device(s)  *\r
+    * outside of their normal operational scope, or in any manner             *\r
+    * inconsistent with the ToS or EULA, will permanently and irrevocably     *\r
+    * void any applicable warranty.                                           *\r
+    ***************************************************************************\r
+    \r
+    TEST-CLSW-P01-UM.7.1.26#\x20
+commands:
+  - "cli\n": |-
+      cli\r
+      TEST-CLSW-P01#\x20
+  - "terminal length 0\n": |-
+      terminal length 0\r
+      TEST-CLSW-P01#\x20
+  - "show running-config\n": |-
+      show running-config\r
+      SYSTEM CONFIG FILE ::= BEGIN\r
+      ! System Description: Unifi Switch UBNT-USL16 Switch\r
+      ! System Version: v3.5.0.3\r
+      ! System Name: TEST-CLSW-P01\r
+      ! System Up Time: <hidden>\r
+      !\r
+      !\r
+      !\r
+      system name \"TEST-CLSW-P01\"\r
+      system location \"<hidden>\"\r
+      system contact \"<hidden>\"\r
+      ip address <hidden> mask <hidden>\r
+      ip default-gateway <hidden>\r
+      !\r
+      !\r
+      vlan 16,31-32,100,110,200\r
+      management-vlan vlan 32\r
+      !\r
+      !\r
+      !\r
+      !\r
+      storm-control unit pps\r
+      !\r
+      spanning-tree priority 8192\r
+      spanning-tree mst configuration\r
+       name \"<hidden>\"\r
+      spanning-tree mst 0 priority 8192\r
+      !\r
+      !\r
+      !\r
+      !\r
+      !\r
+      snmp group \"Ubnt\" version 3 priv read-view \"all\" \r
+      snmp user \"<hidden>\" \"Ubnt\" auth sha \"<hidden>\" priv \"<hidden>\" \r
+      no snmp community \"public\"\r
+      snmp\r
+      radius host <hidden> auth-port 1812 key <hidden> priority 1   type all\r
+      !\r
+      authentication dot1x\r
+      authentication mac\r
+      !\r
+      !\r
+      !\r
+      qos\r
+      qos trust dscp\r
+      !\r
+      !\r
+      !\r
+      !\r
+      !\r
+      !\r
+      !\r
+      interface lag1\r
+       switchport mode hybrid\r
+       switchport hybrid allowed vlan add 16,31-32,100,110,200 tagged\r
+      !\r
+      interface gi1\r
+       switchport mode hybrid\r
+       switchport hybrid allowed vlan add 16,31-32,100,110,200 tagged\r
+       authentication port-control force-auth\r
+       authentication guest-vlan\r
+       description \"<hidden>\"\r
+       lldp tlv-select port-desc sys-name sys-desc sys-cap\r
+       lldp med tlv-select poe-pse\r
+      !\r
+      interface gi2\r
+       switchport mode hybrid\r
+       switchport hybrid allowed vlan add 16,31-32,100,110,200 tagged\r
+       authentication port-control force-auth\r
+       authentication guest-vlan\r
+       description \"<hidden>\"\r
+       lldp tlv-select port-desc sys-name sys-desc sys-cap\r
+       lldp med tlv-select poe-pse\r
+      !\r
+      interface gi3\r
+       switchport mode hybrid\r
+       switchport hybrid allowed vlan add 16,31-32,100,110,200 tagged\r
+       authentication port-control force-auth\r
+       authentication guest-vlan\r
+       description \"<hidden>\"\r
+       lldp tlv-select port-desc sys-name sys-desc sys-cap\r
+       lldp med tlv-select poe-pse\r
+      !\r
+      interface gi4\r
+       switchport mode hybrid\r
+       switchport hybrid allowed vlan add 16,31-32,100,110,200 tagged\r
+       authentication port-control force-auth\r
+       authentication guest-vlan\r
+       description \"<hidden>\"\r
+       lldp tlv-select port-desc sys-name sys-desc sys-cap\r
+       lldp med tlv-select poe-pse\r
+      !\r
+      interface gi5\r
+       switchport mode hybrid\r
+       switchport hybrid allowed vlan add 16,31-32,100,110,200 tagged\r
+       authentication port-control force-auth\r
+       authentication guest-vlan\r
+       description \"<hidden>\"\r
+       lldp tlv-select port-desc sys-name sys-desc sys-cap\r
+       lldp med tlv-select poe-pse\r
+      !\r
+      interface gi6\r
+       switchport mode hybrid\r
+       switchport hybrid allowed vlan add 16,31-32,100,110,200 tagged\r
+       authentication port-control force-auth\r
+       authentication guest-vlan\r
+       description \"<hidden>\"\r
+       lldp tlv-select port-desc sys-name sys-desc sys-cap\r
+       lldp med tlv-select poe-pse\r
+      !\r
+      interface gi7\r
+       switchport mode hybrid\r
+       switchport hybrid allowed vlan add 16,31-32,100,110,200 tagged\r
+       authentication port-control force-auth\r
+       authentication guest-vlan\r
+       description \"<hidden>\"\r
+       lldp tlv-select port-desc sys-name sys-desc sys-cap\r
+       lldp med tlv-select poe-pse\r
+      !\r
+      interface gi8\r
+       switchport mode hybrid\r
+       switchport hybrid allowed vlan add 16,31-32,100,110,200 untagged\r
+       authentication dot1x\r
+       authentication mac\r
+       authentication port-control auto\r
+       authentication order dot1x mac \r
+       authentication guest-vlan\r
+       dot1x timeout tx-period 5\r
+       description \"<hidden>\"\r
+       lldp tlv-select port-desc sys-name sys-desc sys-cap\r
+       lldp med tlv-select poe-pse\r
+      !\r
+      interface gi9\r
+       lag 1 mode active\r
+       switchport mode hybrid\r
+       switchport hybrid allowed vlan add 16,31-32,100,110,200 tagged\r
+       authentication port-control force-auth\r
+       authentication guest-vlan\r
+       description \"<hidden>\"\r
+       lldp tlv-select port-desc sys-name sys-desc sys-cap\r
+      !\r
+      interface gi10\r
+       lag 1 mode active\r
+       switchport mode hybrid\r
+       switchport hybrid allowed vlan add 16,31-32,100,110,200 tagged\r
+       authentication port-control force-auth\r
+       authentication guest-vlan\r
+       description \"<hidden>\"\r
+       lldp tlv-select port-desc sys-name sys-desc sys-cap\r
+      !\r
+      interface gi11\r
+       switchport mode hybrid\r
+       switchport hybrid pvid 32\r
+       switchport hybrid allowed vlan add 32 untagged\r
+       switchport hybrid allowed vlan remove 1\r
+       switchport forbidden vlan add 1,16,31,100,110,200\r
+       authentication port-control force-auth\r
+       authentication guest-vlan\r
+       no spanning-tree\r
+       description \"<hidden>\"\r
+       lldp tlv-select port-desc sys-name sys-desc sys-cap\r
+      !\r
+      interface gi12\r
+       switchport mode hybrid\r
+       switchport hybrid pvid 32\r
+       switchport hybrid allowed vlan add 32 untagged\r
+       switchport hybrid allowed vlan remove 1\r
+       switchport forbidden vlan add 1,16,31,100,110,200\r
+       authentication port-control force-auth\r
+       authentication guest-vlan\r
+       description \"<hidden>\"\r
+       lldp tlv-select port-desc sys-name sys-desc sys-cap\r
+      !\r
+      interface gi13\r
+       switchport mode hybrid\r
+       switchport hybrid allowed vlan add 16,31-32,100,110,200 untagged\r
+       authentication dot1x\r
+       authentication mac\r
+       authentication port-control auto\r
+       authentication order dot1x mac \r
+       authentication guest-vlan\r
+       dot1x timeout tx-period 5\r
+       description \"<hidden>\"\r
+       lldp tlv-select port-desc sys-name sys-desc sys-cap\r
+      !\r
+      interface gi14\r
+       switchport mode hybrid\r
+       switchport hybrid allowed vlan add 16,31-32,100,110,200 untagged\r
+       authentication dot1x\r
+       authentication mac\r
+       authentication port-control auto\r
+       authentication order dot1x mac \r
+       authentication guest-vlan\r
+       dot1x timeout tx-period 5\r
+       description \"<hidden>\"\r
+       lldp tlv-select port-desc sys-name sys-desc sys-cap\r
+      !\r
+      interface gi15\r
+       switchport mode hybrid\r
+       switchport hybrid allowed vlan add 16,31-32,100,110,200 untagged\r
+       authentication dot1x\r
+       authentication mac\r
+       authentication port-control auto\r
+       authentication order dot1x mac \r
+       authentication guest-vlan\r
+       dot1x timeout tx-period 5\r
+       description \"<hidden>\"\r
+       lldp tlv-select port-desc sys-name sys-desc sys-cap\r
+      !\r
+      interface gi16\r
+       switchport mode hybrid\r
+       switchport hybrid allowed vlan add 16,31-32,100,110,200 tagged\r
+       authentication port-control force-auth\r
+       authentication guest-vlan\r
+       description \"<hidden>\"\r
+       lldp tlv-select port-desc sys-name sys-desc sys-cap\r
+      !\r
+      interface gi17\r
+       switchport mode hybrid\r
+       switchport hybrid pvid 31\r
+       switchport hybrid allowed vlan add 31 untagged\r
+       switchport hybrid allowed vlan remove 1\r
+       switchport forbidden vlan add 1,16,32,100,110,200\r
+       authentication port-control force-auth\r
+       authentication guest-vlan\r
+       description \"<hidden>\"\r
+       lldp tlv-select port-desc sys-name sys-desc sys-cap\r
+      !\r
+      interface gi18\r
+       switchport mode hybrid\r
+       switchport hybrid allowed vlan add 16,31-32,100,110,200 tagged\r
+       authentication port-control force-auth\r
+       authentication guest-vlan\r
+       description \"<hidden>\"\r
+       lldp tlv-select port-desc sys-name sys-desc sys-cap\r
+      !\r
+      !\r
+      !\r
+      !\r
+      \r
+      TEST-CLSW-P01#\x20
+  - "exit\n": |-
+      exit\r
+      TEST-CLSW-P01>\x20
+  - "exit\n": |-
+      exit\r
+      Terminated\r
+      TEST-CLSW-P01-UM.7.1.26#\x20
+  - "exit\n": |-
