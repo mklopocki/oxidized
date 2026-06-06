@@ -5,7 +5,7 @@ class Unifiswitch < Oxidized::Model
   prompt /^(?:\(UBNT\)\s*>|[A-Za-z0-9.\-]+[#>])\s*$/
 
   cmd 'show running-config' do |cfg|
-    cfg.reject_lines ['System Up Time', 'SYSTEM CONFIG FILE', 'Current Configuration']
+    cfg.gsub! /^(SYSTEM CONFIG FILE).*$/, ''
     cfg.gsub! /^(!\s*System Up Time[\s:]+).*$/, '\\1 <removed>'
     cfg.cut_both
   end
