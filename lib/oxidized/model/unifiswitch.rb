@@ -6,7 +6,8 @@ class Unifiswitch < Oxidized::Model
 
   cmd 'show running-config' do |cfg|
     cfg.reject_lines ['System Up Time', 'SYSTEM CONFIG FILE', 'Current Configuration']
-    cfg.each_line.to_a[4..-4].join
+    cfg.gsub! /^(!\s*System Up Time[\s:]+).*$/, '\\1 <removed>'
+    cfg.cut_both
   end
 
   cfg :ssh do
