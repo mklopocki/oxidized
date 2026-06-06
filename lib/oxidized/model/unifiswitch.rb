@@ -14,7 +14,7 @@ class Unifiswitch < Oxidized::Model
     post_login do
       sleep 2
       cmd 'cli'
-      cmd "enable" if vars :enable
+      cmd 'enable' if vars :enable
       cmd 'terminal length 0'
     end
 
