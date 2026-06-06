@@ -1,0 +1,733 @@
+---
+init_prompt: |-
+    \r
+    \r
+    BusyBox v1.25.1 () built-in shell (ash)\r
+    \r
+    \r
+      ___ ___      .__________.__\r
+     |   |   |____ |__\\_  ____/__|\r
+     |   |   /    \\|  ||  __) |  |   (c) 2010-2025\r
+     |   |  |   |  \\  ||  \\   |  |   Ubiquiti Inc.\r
+     |______|___|  /__||__/   |__|\r
+                |_/                  https://www.ui.com\r
+    \r
+          Welcome to UniFi USW-Pro-24-PoE!\r
+    \r
+    ********************************* NOTICE **********************************\r
+    * By logging in to, accessing, or using any Ubiquiti product, you are     *\r
+    * signifying that you have read our Terms of Service (ToS) and End User   *\r
+    * License Agreement (EULA), understand their terms, and agree to be       *\r
+    * fully bound to them. The use of SSH (Secure Shell) can potentially      *\r
+    * harm Ubiquiti devices and result in lost access to them and their data. *\r
+    * By proceeding, you acknowledge that the use of SSH to modify device(s)  *\r
+    * outside of their normal operational scope, or in any manner             *\r
+    * inconsistent with the ToS or EULA, will permanently and irrevocably     *\r
+    * void any applicable warranty.                                           *\r
+    ***************************************************************************\r
+    \r
+    TEST-CLSW-P01-US.7.2.123# [warn ] PUT 'https://trace.svc.ui.com/traces' failed: [6] Couldn't resolve host name\r
+    
+commands:
+  - "cli\n": |-
+      cli\r
+      \r\r
+      Entering character mode\r\r
+      Escape character is '^]'.\r\r
+      \r
+      Warning!\r
+      The changes may break controller settings and only be effective until reboot.\r
+      \r
+      (UBNT) >
+  - "enable\n": |-
+      enable\r
+      \r
+      (UBNT) #
+  - "terminal length 0\n": |-
+      terminal length 0\r
+      \r
+      (UBNT) #
+  - "show running-config\n": |-
+      show running-config\r
+      \r
+      !Current Configuration:\r
+      !\r
+      !System Description \"USW-Pro-24-PoE, 7.2.123.16565, Linux 3.6.5\"\r
+      !System Software Version \"7.2.123.16565\"\r
+      !System Up Time          \"<hidden>\"\r
+      !Additional Packages     QOS,IPv6 Management,Routing\r
+      !\r
+      network parms <hidden> <hidden> <hidden>\r
+      vlan database\r
+      vlan 100,200,222,300\r
+      exit\r
+      \r
+      network mgmt_vlan 100\r
+      configure\r
+      \r
+      \r
+      line console\r
+      exit\r
+      \r
+      line telnet\r
+      exit\r
+      \r
+      spanning-tree mst priority 0 12288\r
+      spanning-tree mode rstp\r
+      snmp-server sysname \"TEST-CLSW-P01\"\r
+      snmp-server location \"<hidden>\"\r
+      snmp-server contact \"<hidden>\"\r
+      !\r
+      snmp-server group \"Ubnt\" v3 priv read \"Default\"\r
+      snmp-server user \"<hidden>\" Ubnt auth-sha-key <hidden> priv-aes128-key <hidden>\r
+      set igmp known-multicast-proto flood none\r
+      set igmp reportforward lldp\r
+      no set igmp forward-unknown-rtr-ports\r
+      set mld reportforward lldp\r
+      no set mld forward-unknown-rtr-ports\r
+      ip dhcp snooping\r
+      ip dhcp snooping vlan 1,100,200,222,300\r
+      cos-queue strict 2 3 4 5 6 7\r
+      keepalive\r
+      \r
+      interface 0/1\r
+      description '<hidden>'\r
+      vlan ingressfilter\r
+      vlan participation include 100,200,222,300\r
+      vlan tagging 1,100,200,222,300\r
+      port-security max-dynamic 0\r
+      lldp transmit\r
+      lldp receive\r
+      lldp transmit-tlv port-desc\r
+      lldp transmit-tlv sys-name\r
+      lldp transmit-tlv sys-desc\r
+      lldp transmit-tlv sys-cap\r
+      lldp med\r
+      poe opmode shutdown\r
+      no poe autodetect enable\r
+      exit\r
+      \r
+      \r
+      \r
+      interface 0/2\r
+      description '<hidden>'\r
+      vlan pvid 200\r
+      vlan ingressfilter\r
+      vlan participation exclude 1,100,222,300\r
+      vlan participation include 200\r
+      port-security max-dynamic 0\r
+      lldp transmit\r
+      lldp receive\r
+      lldp transmit-tlv port-desc\r
+      lldp transmit-tlv sys-name\r
+      lldp transmit-tlv sys-desc\r
+      lldp transmit-tlv sys-cap\r
+      lldp med\r
+      lldp med transmit-tlv ex-pse\r
+      no poe autodetect enable\r
+      exit\r
+      \r
+      \r
+      \r
+      interface 0/3\r
+      description '<hidden>'\r
+      vlan pvid 200\r
+      vlan ingressfilter\r
+      vlan participation exclude 1,100,222,300\r
+      vlan participation include 200\r
+      port-security max-dynamic 0\r
+      lldp transmit\r
+      lldp receive\r
+      lldp transmit-tlv port-desc\r
+      lldp transmit-tlv sys-name\r
+      lldp transmit-tlv sys-desc\r
+      lldp transmit-tlv sys-cap\r
+      lldp med\r
+      lldp med transmit-tlv ex-pse\r
+      no poe autodetect enable\r
+      exit\r
+      \r
+      \r
+      \r
+      interface 0/4\r
+      description '<hidden>'\r
+      vlan pvid 200\r
+      vlan ingressfilter\r
+      vlan participation exclude 1,100,222,300\r
+      vlan participation include 200\r
+      port-security max-dynamic 0\r
+      lldp transmit\r
+      lldp receive\r
+      lldp transmit-tlv port-desc\r
+      lldp transmit-tlv sys-name\r
+      lldp transmit-tlv sys-desc\r
+      lldp transmit-tlv sys-cap\r
+      lldp med\r
+      lldp med transmit-tlv ex-pse\r
+      no poe autodetect enable\r
+      exit\r
+      \r
+      \r
+      \r
+      interface 0/5\r
+      description '<hidden>'\r
+      vlan ingressfilter\r
+      vlan participation include 100,200,222,300\r
+      vlan tagging 100,200,222,300\r
+      port-security max-dynamic 0\r
+      lldp transmit\r
+      lldp receive\r
+      lldp transmit-tlv port-desc\r
+      lldp transmit-tlv sys-name\r
+      lldp transmit-tlv sys-desc\r
+      lldp transmit-tlv sys-cap\r
+      lldp med\r
+      lldp med transmit-tlv ex-pse\r
+      no poe autodetect enable\r
+      exit\r
+      \r
+      \r
+      \r
+      interface 0/6\r
+      description '<hidden>'\r
+      vlan ingressfilter\r
+      vlan participation include 100,200,222,300\r
+      vlan tagging 100,200,222,300\r
+      port-security max-dynamic 0\r
+      lldp transmit\r
+      lldp receive\r
+      lldp transmit-tlv port-desc\r
+      lldp transmit-tlv sys-name\r
+      lldp transmit-tlv sys-desc\r
+      lldp transmit-tlv sys-cap\r
+      lldp med\r
+      lldp med transmit-tlv ex-pse\r
+      no poe autodetect enable\r
+      exit\r
+      \r
+      \r
+      \r
+      interface 0/7\r
+      description '<hidden>'\r
+      vlan ingressfilter\r
+      vlan participation include 100,200,222,300\r
+      vlan tagging 100,200,222,300\r
+      port-security max-dynamic 0\r
+      lldp transmit\r
+      lldp receive\r
+      lldp transmit-tlv port-desc\r
+      lldp transmit-tlv sys-name\r
+      lldp transmit-tlv sys-desc\r
+      lldp transmit-tlv sys-cap\r
+      lldp med\r
+      lldp med transmit-tlv ex-pse\r
+      no poe autodetect enable\r
+      exit\r
+      \r
+      \r
+      \r
+      interface 0/8\r
+      description '<hidden>'\r
+      vlan ingressfilter\r
+      vlan participation include 100,200,222,300\r
+      vlan tagging 100,200,222,300\r
+      port-security max-dynamic 0\r
+      lldp transmit\r
+      lldp receive\r
+      lldp transmit-tlv port-desc\r
+      lldp transmit-tlv sys-name\r
+      lldp transmit-tlv sys-desc\r
+      lldp transmit-tlv sys-cap\r
+      lldp med\r
+      lldp med transmit-tlv ex-pse\r
+      no poe autodetect enable\r
+      exit\r
+      \r
+      \r
+      \r
+      interface 0/9\r
+      description '<hidden>'\r
+      vlan ingressfilter\r
+      vlan participation include 100,200,222,300\r
+      vlan tagging 100,200,222,300\r
+      port-security max-dynamic 0\r
+      lldp transmit\r
+      lldp receive\r
+      lldp transmit-tlv port-desc\r
+      lldp transmit-tlv sys-name\r
+      lldp transmit-tlv sys-desc\r
+      lldp transmit-tlv sys-cap\r
+      lldp med\r
+      lldp med transmit-tlv ex-pse\r
+      no poe autodetect enable\r
+      exit\r
+      \r
+      \r
+      \r
+      interface 0/10\r
+      description '<hidden>'\r
+      vlan ingressfilter\r
+      vlan participation include 100,200,222,300\r
+      vlan tagging 100,200,222,300\r
+      port-security max-dynamic 0\r
+      lldp transmit\r
+      lldp receive\r
+      lldp transmit-tlv port-desc\r
+      lldp transmit-tlv sys-name\r
+      lldp transmit-tlv sys-desc\r
+      lldp transmit-tlv sys-cap\r
+      lldp med\r
+      lldp med transmit-tlv ex-pse\r
+      no poe autodetect enable\r
+      exit\r
+      \r
+      \r
+      \r
+      interface 0/11\r
+      description '<hidden>'\r
+      vlan ingressfilter\r
+      vlan participation include 100,200,222,300\r
+      vlan tagging 100,200,222,300\r
+      port-security max-dynamic 0\r
+      lldp transmit\r
+      lldp receive\r
+      lldp transmit-tlv port-desc\r
+      lldp transmit-tlv sys-name\r
+      lldp transmit-tlv sys-desc\r
+      lldp transmit-tlv sys-cap\r
+      lldp med\r
+      lldp med transmit-tlv ex-pse\r
+      no poe autodetect enable\r
+      exit\r
+      \r
+      \r
+      \r
+      interface 0/12\r
+      description '<hidden>'\r
+      vlan ingressfilter\r
+      vlan participation include 100,200,222,300\r
+      vlan tagging 100,200,222,300\r
+      port-security max-dynamic 0\r
+      lldp transmit\r
+      lldp receive\r
+      lldp transmit-tlv port-desc\r
+      lldp transmit-tlv sys-name\r
+      lldp transmit-tlv sys-desc\r
+      lldp transmit-tlv sys-cap\r
+      lldp med\r
+      lldp med transmit-tlv ex-pse\r
+      no poe autodetect enable\r
+      exit\r
+      \r
+      \r
+      \r
+      interface 0/13\r
+      description '<hidden>'\r
+      vlan ingressfilter\r
+      vlan participation include 100,200,222,300\r
+      vlan tagging 100,200,222,300\r
+      port-security max-dynamic 0\r
+      lldp transmit\r
+      lldp receive\r
+      lldp transmit-tlv port-desc\r
+      lldp transmit-tlv sys-name\r
+      lldp transmit-tlv sys-desc\r
+      lldp transmit-tlv sys-cap\r
+      lldp med\r
+      lldp med transmit-tlv ex-pse\r
+      no poe autodetect enable\r
+      exit\r
+      \r
+      \r
+      \r
+      interface 0/14\r
+      description '<hidden>'\r
+      vlan ingressfilter\r
+      vlan participation include 100,200,222,300\r
+      vlan tagging 100,200,222,300\r
+      port-security max-dynamic 0\r
+      lldp transmit\r
+      lldp receive\r
+      lldp transmit-tlv port-desc\r
+      lldp transmit-tlv sys-name\r
+      lldp transmit-tlv sys-desc\r
+      lldp transmit-tlv sys-cap\r
+      lldp med\r
+      lldp med transmit-tlv ex-pse\r
+      no poe autodetect enable\r
+      exit\r
+      \r
+      \r
+      \r
+      interface 0/15\r
+      description '<hidden>'\r
+      vlan ingressfilter\r
+      vlan participation include 100,200,222,300\r
+      vlan tagging 100,200,222,300\r
+      port-security max-dynamic 0\r
+      lldp transmit\r
+      lldp receive\r
+      lldp transmit-tlv port-desc\r
+      lldp transmit-tlv sys-name\r
+      lldp transmit-tlv sys-desc\r
+      lldp transmit-tlv sys-cap\r
+      lldp med\r
+      poe opmode shutdown\r
+      no poe autodetect enable\r
+      exit\r
+      \r
+      \r
+      \r
+      interface 0/16\r
+      description '<hidden>'\r
+      vlan ingressfilter\r
+      vlan participation include 100,200,222,300\r
+      vlan tagging 100,200,222,300\r
+      port-security max-dynamic 0\r
+      lldp transmit\r
+      lldp receive\r
+      lldp transmit-tlv port-desc\r
+      lldp transmit-tlv sys-name\r
+      lldp transmit-tlv sys-desc\r
+      lldp transmit-tlv sys-cap\r
+      lldp med\r
+      poe opmode shutdown\r
+      no poe autodetect enable\r
+      exit\r
+      \r
+      \r
+      \r
+      interface 0/17\r
+      description '<hidden>'\r
+      vlan ingressfilter\r
+      vlan participation include 100,200,222,300\r
+      vlan tagging 100,200,222,300\r
+      port-security max-dynamic 0\r
+      lldp transmit\r
+      lldp receive\r
+      lldp transmit-tlv port-desc\r
+      lldp transmit-tlv sys-name\r
+      lldp transmit-tlv sys-desc\r
+      lldp transmit-tlv sys-cap\r
+      lldp med\r
+      lldp med transmit-tlv ex-pse\r
+      poe detection 4ptdot3af\r
+      poe high-power dot3bt-type3\r
+      poe autodetect enable\r
+      exit\r
+      \r
+      \r
+      \r
+      interface 0/18\r
+      description '<hidden>'\r
+      vlan pvid 100\r
+      vlan ingressfilter\r
+      vlan participation include 100,200,222,300\r
+      vlan tagging 1,200,222,300\r
+      port-security max-dynamic 0\r
+      lldp transmit\r
+      lldp receive\r
+      lldp transmit-tlv port-desc\r
+      lldp transmit-tlv sys-name\r
+      lldp transmit-tlv sys-desc\r
+      lldp transmit-tlv sys-cap\r
+      lldp med\r
+      lldp med transmit-tlv ex-pse\r
+      poe detection 4ptdot3af\r
+      poe high-power dot3bt-type3\r
+      poe autodetect enable\r
+      exit\r
+      \r
+      \r
+      \r
+      interface 0/19\r
+      description '<hidden>'\r
+      vlan ingressfilter\r
+      vlan participation include 100,200,222,300\r
+      vlan tagging 100,200,222,300\r
+      port-security max-dynamic 0\r
+      lldp transmit\r
+      lldp receive\r
+      lldp transmit-tlv port-desc\r
+      lldp transmit-tlv sys-name\r
+      lldp transmit-tlv sys-desc\r
+      lldp transmit-tlv sys-cap\r
+      lldp med\r
+      lldp med transmit-tlv ex-pse\r
+      poe detection 4ptdot3af\r
+      poe high-power dot3bt-type3\r
+      poe autodetect enable\r
+      exit\r
+      \r
+      \r
+      \r
+      interface 0/20\r
+      description '<hidden>'\r
+      vlan ingressfilter\r
+      vlan participation include 100,200,222,300\r
+      vlan tagging 100,200,222,300\r
+      port-security max-dynamic 0\r
+      lldp transmit\r
+      lldp receive\r
+      lldp transmit-tlv port-desc\r
+      lldp transmit-tlv sys-name\r
+      lldp transmit-tlv sys-desc\r
+      lldp transmit-tlv sys-cap\r
+      lldp med\r
+      lldp med transmit-tlv ex-pse\r
+      poe detection 4ptdot3af\r
+      poe high-power dot3bt-type3\r
+      poe autodetect enable\r
+      exit\r
+      \r
+      \r
+      \r
+      interface 0/21\r
+      description '<hidden>'\r
+      vlan ingressfilter\r
+      vlan participation include 100,200,222,300\r
+      vlan tagging 100,200,222,300\r
+      port-security max-dynamic 0\r
+      lldp transmit\r
+      lldp receive\r
+      lldp transmit-tlv port-desc\r
+      lldp transmit-tlv sys-name\r
+      lldp transmit-tlv sys-desc\r
+      lldp transmit-tlv sys-cap\r
+      lldp med\r
+      lldp med transmit-tlv ex-pse\r
+      poe detection 4ptdot3af\r
+      poe high-power dot3bt-type3\r
+      poe autodetect enable\r
+      exit\r
+      \r
+      \r
+      \r
+      interface 0/22\r
+      description '<hidden>'\r
+      vlan ingressfilter\r
+      vlan participation include 100,200,222,300\r
+      vlan tagging 100,200,222,300\r
+      port-security max-dynamic 0\r
+      lldp transmit\r
+      lldp receive\r
+      lldp transmit-tlv port-desc\r
+      lldp transmit-tlv sys-name\r
+      lldp transmit-tlv sys-desc\r
+      lldp transmit-tlv sys-cap\r
+      lldp med\r
+      lldp med transmit-tlv ex-pse\r
+      poe detection 4ptdot3af\r
+      poe high-power dot3bt-type3\r
+      poe autodetect enable\r
+      exit\r
+      \r
+      \r
+      \r
+      interface 0/23\r
+      description '<hidden>'\r
+      vlan ingressfilter\r
+      vlan participation include 100,200,222,300\r
+      vlan tagging 100,200,222,300\r
+      port-security max-dynamic 0\r
+      lldp transmit\r
+      lldp receive\r
+      lldp transmit-tlv port-desc\r
+      lldp transmit-tlv sys-name\r
+      lldp transmit-tlv sys-desc\r
+      lldp transmit-tlv sys-cap\r
+      lldp med\r
+      lldp med transmit-tlv ex-pse\r
+      poe detection 4ptdot3af\r
+      poe high-power dot3bt-type3\r
+      poe autodetect enable\r
+      exit\r
+      \r
+      \r
+      \r
+      interface 0/24\r
+      description '<hidden>'\r
+      vlan ingressfilter\r
+      vlan participation include 100,200,222,300\r
+      vlan tagging 100,200,222,300\r
+      port-security max-dynamic 0\r
+      lldp transmit\r
+      lldp receive\r
+      lldp transmit-tlv port-desc\r
+      lldp transmit-tlv sys-name\r
+      lldp transmit-tlv sys-desc\r
+      lldp transmit-tlv sys-cap\r
+      lldp med\r
+      lldp med transmit-tlv ex-pse\r
+      poe detection 4ptdot3af\r
+      poe high-power dot3bt-type3\r
+      poe autodetect enable\r
+      exit\r
+      \r
+      \r
+      \r
+      interface 0/25\r
+      description '<hidden>'\r
+      vlan ingressfilter\r
+      vlan participation include 100,200,222,300\r
+      vlan tagging 100,200,222,300\r
+      port-security max-dynamic 0\r
+      lldp transmit\r
+      lldp receive\r
+      lldp transmit-tlv port-desc\r
+      lldp transmit-tlv sys-name\r
+      lldp transmit-tlv sys-desc\r
+      lldp transmit-tlv sys-cap\r
+      lldp med\r
+      exit\r
+      \r
+      \r
+      \r
+      interface 0/26\r
+      description '<hidden>'\r
+      vlan ingressfilter\r
+      vlan participation include 100,200,222,300\r
+      vlan tagging 100,200,222,300\r
+      port-security max-dynamic 0\r
+      lldp transmit\r
+      lldp receive\r
+      lldp transmit-tlv port-desc\r
+      lldp transmit-tlv sys-name\r
+      lldp transmit-tlv sys-desc\r
+      lldp transmit-tlv sys-cap\r
+      lldp med\r
+      exit\r
+      \r
+      \r
+      \r
+      interface lag 1\r
+      shutdown\r
+      no port-channel static\r
+      no spanning-tree port mode\r
+      vlan participation exclude 1,100,200,222,300\r
+      exit\r
+      \r
+      \r
+      \r
+      interface lag 2\r
+      shutdown\r
+      no port-channel static\r
+      no spanning-tree port mode\r
+      vlan participation exclude 1,100,200,222,300\r
+      exit\r
+      \r
+      \r
+      \r
+      interface lag 3\r
+      shutdown\r
+      no port-channel static\r
+      no spanning-tree port mode\r
+      vlan participation exclude 1,100,200,222,300\r
+      exit\r
+      \r
+      \r
+      \r
+      interface lag 4\r
+      shutdown\r
+      no port-channel static\r
+      no spanning-tree port mode\r
+      vlan participation exclude 1,100,200,222,300\r
+      exit\r
+      \r
+      \r
+      \r
+      interface lag 5\r
+      shutdown\r
+      no port-channel static\r
+      no spanning-tree port mode\r
+      vlan participation exclude 1,100,200,222,300\r
+      exit\r
+      \r
+      \r
+      \r
+      interface lag 6\r
+      shutdown\r
+      no port-channel static\r
+      no spanning-tree port mode\r
+      vlan participation exclude 1,100,200,222,300\r
+      exit\r
+      \r
+      \r
+      \r
+      interface lag 7\r
+      shutdown\r
+      no port-channel static\r
+      no spanning-tree port mode\r
+      vlan participation exclude 1,100,200,222,300\r
+      exit\r
+      \r
+      \r
+      \r
+      interface lag 8\r
+      shutdown\r
+      no port-channel static\r
+      no spanning-tree port mode\r
+      vlan participation exclude 1,100,200,222,300\r
+      exit\r
+      \r
+      \r
+      \r
+      interface lag 9\r
+      shutdown\r
+      no port-channel static\r
+      no spanning-tree port mode\r
+      vlan participation exclude 1,100,200,222,300\r
+      exit\r
+      \r
+      \r
+      \r
+      interface lag 10\r
+      shutdown\r
+      no port-channel static\r
+      no spanning-tree port mode\r
+      vlan participation exclude 1,100,200,222,300\r
+      exit\r
+      \r
+      \r
+      \r
+      interface lag 11\r
+      shutdown\r
+      no port-channel static\r
+      no spanning-tree port mode\r
+      vlan participation exclude 1,100,200,222,300\r
+      exit\r
+      \r
+      \r
+      \r
+      interface lag 12\r
+      shutdown\r
+      no port-channel static\r
+      no spanning-tree port mode\r
+      vlan participation exclude 1,100,200,222,300\r
+      exit\r
+      \r
+      \r
+      \r
+      interface lag 13\r
+      shutdown\r
+      no port-channel static\r
+      no spanning-tree port mode\r
+      vlan participation exclude 1,100,200,222,300\r
+      exit\r
+      \r
+      \r
+      no errdisable recovery cause keepalive\r
+      exit\r
+      \r
+      \r
+      (UBNT) #
+  - "exit\n": |-
+      exit\r
+      \r
+      (UBNT) >
+  - "exit\n": |-
+      exitConnection closed by foreign host\r
+      TEST-CLSW-P01-US.7.2.123#\x20
+  - "exit\n": |-
+      exit\r
+      
