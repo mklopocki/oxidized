@@ -2,7 +2,7 @@ class Unifiswitch < Oxidized::Model
   using Refinements
 
   comment '!'
-  prompt /^(?:\(UBNT\)\s*>|[A-Za-z0-9.\-]+[#>])\s*$/
+  prompt /^(?:\(UBNT\)\s*|[A-Za-z0-9.\-]+)[#>]\s*$/
 
   cmd 'show running-config' do |cfg|
     cfg.gsub! /^(SYSTEM CONFIG FILE).*$/, ''
@@ -14,15 +14,15 @@ class Unifiswitch < Oxidized::Model
     post_login do
       sleep 2
       cmd 'cli'
-      if vars(:enable).to_s == 'true'
-        cmd 'enable'
-      end
+      cmd 'enable'
       cmd 'terminal length 0'
     end
 
     pre_logout do
       cmd 'exit'
+      sleep 1
       cmd 'exit'
+      sleep 1
       cmd 'exit'
     end
   end
