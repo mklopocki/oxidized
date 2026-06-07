@@ -19,10 +19,11 @@ class Unifiswitch < Oxidized::Model
     end
 
     pre_logout do
+      sleep 2
       cmd 'exit'
-      sleep 1
+      sleep 2
       cmd 'exit'
-      sleep 1
+      sleep 2
       cmd 'exit'
     end
   end
